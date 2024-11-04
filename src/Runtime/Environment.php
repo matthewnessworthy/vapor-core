@@ -83,7 +83,10 @@ class Environment
     public function decryptEnvironment()
     {
         try {
+            function_exists('__vapor_debug') && __vapor_debug('Decrypting environment');
             if (! $this->canBeDecrypted()) {
+                function_exists('__vapor_debug') && __vapor_debug('Environment cannot be decrypted');
+
                 return;
             }
 
@@ -105,6 +108,8 @@ class Environment
     public function canBeDecrypted()
     {
         if (! isset($_ENV['LARAVEL_ENV_ENCRYPTION_KEY'])) {
+            function_exists('__vapor_debug') && __vapor_debug('Missing LARAVEL_ENV_ENCRYPTION_KEY env');
+
             return false;
         }
 
